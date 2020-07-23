@@ -177,7 +177,7 @@ class CreateInvitationHandler(BaseHandler):
         connection, invitation = await connection_mgr.create_invitation(
             my_label=context.message.label,
             their_role=context.message.role,
-            auto_accept=context.message.auto_accept,
+            accept=context.message.auto_accept,
             multi_use=bool(context.message.multi_use),
             public=bool(context.message.public),
         )
@@ -210,7 +210,7 @@ class ReceiveInvitationHandler(BaseHandler):
         connection_mgr = ConnectionManager(context)
         invitation = ConnectionInvitation.from_url(context.message.invitation)
         connection = await connection_mgr.receive_invitation(
-            invitation, auto_accept=context.message.auto_accept
+            invitation, accept=context.message.auto_accept
         )
         connection_resp = Connection(connection=connection)
         await responder.send_reply(connection_resp)

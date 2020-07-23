@@ -98,7 +98,7 @@ class CreateInvitationHandler(BaseHandler):
         connection, invitation = await connection_mgr.create_invitation(
             my_label=context.message.label,
             their_role=context.message.role,
-            auto_accept="auto" if context.message.auto_accept else "none",
+            accept="auto" if context.message.auto_accept else "none",
             multi_use=bool(context.message.multi_use),
             public=False,
             alias=context.message.alias,
@@ -108,7 +108,7 @@ class CreateInvitationHandler(BaseHandler):
             label=invitation.label,
             alias=connection.alias,
             role=connection.their_role,
-            auto_accept=connection.accept == ConnectionRecord.ACCEPT_AUTO,
+            accept=connection.accept == ConnectionRecord.ACCEPT_AUTO,
             multi_use=(
                 connection.invitation_mode == ConnectionRecord.INVITATION_MODE_MULTI
             ),
